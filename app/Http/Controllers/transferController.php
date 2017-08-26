@@ -30,26 +30,27 @@ class transferController extends Controller
 
 	
 	private function getToken(){
-		$path = '/api/oauth/token';
-		$headers = array(
-			'Content-Type: application/x-www-form-urlencoded',
-			'Authorization: Basic '.base64_encode(self::$client_id.':'.self::$client_secret));
-		$data = array(
-			'grant_type' => 'client_credentials'
-		);
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, self::$main_url.$path);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
-		curl_setopt_array($ch, array(
-			CURLOPT_POST => TRUE,
-			CURLOPT_RETURNTRANSFER => TRUE,
-			CURLOPT_HTTPHEADER => $headers,
-			CURLOPT_POSTFIELDS => http_build_query($data),
-		));
-		$output = curl_exec($ch);
-		curl_close($ch);
-		$result = json_decode($output,true);
-		self::$access_token = $result['access_token'];
+		// $path = '/api/oauth/token';
+		// $headers = array(
+		// 	'Content-Type: application/x-www-form-urlencoded',
+		// 	'Authorization: Basic '.base64_encode(self::$client_id.':'.self::$client_secret));
+		// $data = array(
+		// 	'grant_type' => 'client_credentials'
+		// );
+		// $ch = curl_init();
+		// curl_setopt($ch, CURLOPT_URL, self::$main_url.$path);
+		// curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
+		// curl_setopt_array($ch, array(
+		// 	CURLOPT_POST => TRUE,
+		// 	CURLOPT_RETURNTRANSFER => TRUE,
+		// 	CURLOPT_HTTPHEADER => $headers,
+		// 	CURLOPT_POSTFIELDS => http_build_query($data),
+		// ));
+		// $output = curl_exec($ch);
+		// curl_close($ch);
+		// $result = json_decode($output,true);
+		// self::$access_token = $result['access_token'];
+		self::$access_token = 'MDBhMmNlY2YtNTdhOS00OTVkLWIzMzctMDUzNzk0ODFjZWEyOjkwZjg2NmYwLTBiYjEtNDE5Zi1iZmNjLWFiZDNjZTY1ZDBlMQ=='
 	}
 	private function parseSignature($res){
 		$explode_response = explode(',', $res);
