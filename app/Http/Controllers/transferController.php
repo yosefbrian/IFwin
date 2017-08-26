@@ -13,11 +13,17 @@ use DateIntercal;
 
 class transferController extends Controller
 {
-    private static $main_url = 'https://sandbox.bca.co.id'; 
-	private static $client_id = 'd84b8c47-4f7d-4de3-b55c-9ee27045020b'; 
-	private static $client_secret = '32deb748-b3d8-4df6-9ea5-67f44029706c'; 
-	private static $api_key = '5f4749f0-8b9f-4148-ad1d-a12b955e7dae'; 
-	private static $api_secret = '24d3e053-27be-4738-9c6f-04e3a8830e4d'; 
+ //    private static $main_url = 'https://sandbox.bca.co.id'; 
+	// private static $client_id = 'd84b8c47-4f7d-4de3-b55c-9ee27045020b'; 
+	// private static $client_secret = '32deb748-b3d8-4df6-9ea5-67f44029706c'; 
+	// private static $api_key = '5f4749f0-8b9f-4148-ad1d-a12b955e7dae'; 
+	// private static $api_secret = '24d3e053-27be-4738-9c6f-04e3a8830e4d'; 
+
+	private static $main_url = 'https://api.finhacks.id'; 
+	private static $client_id = '00a2cecf-57a9-495d-b337-05379481cea2'; 
+	private static $client_secret = '90f866f0-0bb1-419f-bfcc-abd3ce65d0e1'; 
+	private static $api_key = '1b6e44be-df70-4013-8a75-3d7abd2a8046'; 
+	private static $api_secret = '60766ed9-2480-4f47-ab3f-68a5a719b54d'; 
 	private static $access_token = null;
 	private static $signature = null;
 	private static $timestamp = null;
@@ -64,7 +70,7 @@ class transferController extends Controller
 	
 		$curl = curl_init();
 				curl_setopt_array($curl, array(
-				  CURLOPT_URL => "https://sandbox.bca.co.id/utilities/signature",
+				  CURLOPT_URL => self::$main_url."/utilities/signature",
 				  CURLOPT_RETURNTRANSFER => true,
 				  CURLOPT_ENCODING => "",
 				  CURLOPT_MAXREDIRS => 10,
@@ -96,12 +102,16 @@ class transferController extends Controller
 		$path = '/banking/corporates/transfers';
 		$method = 'POST';
 
-		$data = "{\r\n    \"CorporateID\" : \"BCAAPI2016\",\r\n    \"SourceAccountNumber\" : \"0201245680\",\r\n    \"TransactionID\" : \"00000001\",\r\n    \"TransactionDate\" : \"2017-08-26\",\r\n    \"ReferenceID\" : \"12345/PO/2016\",\r\n    \"CurrencyCode\" : \"IDR\",\r\n    \"Amount\" : \"100000.00\",\r\n    \"BeneficiaryAccountNumber\" : \"0201245681\",\r\n    \"Remark1\" : \"Transfer Test\",\r\n    \"Remark2\" : \"Online Transfer\"\r\n}";
+		// $data = "{\r\n    \"CorporateID\" : \"BCAAPI2016\",\r\n    \"SourceAccountNumber\" : \"0201245680\",\r\n    \"TransactionID\" : \"00000002\",\r\n    \"TransactionDate\" : \"2017-08-26\",\r\n    \"ReferenceID\" : \"12345/PO/2016\",\r\n    \"CurrencyCode\" : \"IDR\",\r\n    \"Amount\" : \"100000.00\",\r\n    \"BeneficiaryAccountNumber\" : \"0201245681\",\r\n    \"Remark1\" : \"Transfer Test\",\r\n    \"Remark2\" : \"Online Transfer\"\r\n}";
+
+
+	$data = "{\r\n    \"CorporateID\" : \"finhacks01\",\r\n    \"SourceAccountNumber\" : \"8220000011\",\r\n    \"TransactionID\" : \"00000002\",\r\n    \"TransactionDate\" : \"2017-08-26\",\r\n    \"ReferenceID\" : \"12345/PO/2016\",\r\n    \"CurrencyCode\" : \"IDR\",\r\n    \"Amount\" : \"100000.00\",\r\n    \"BeneficiaryAccountNumber\" : \"8220000118\",\r\n    \"Remark1\" : \"Transfer Test\",\r\n    \"Remark2\" : \"Online Transfer\"\r\n}";
+
 		$this->getSignature($path, $method, $data);
 
 		$curl = curl_init();
 			curl_setopt_array($curl, array(
-			  CURLOPT_URL => "https://sandbox.bca.co.id/banking/corporates/transfers",
+			  CURLOPT_URL => self::$main_url."/banking/corporates/transfers",
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => "",
 			  CURLOPT_MAXREDIRS => 10,
